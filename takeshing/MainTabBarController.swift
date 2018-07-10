@@ -11,7 +11,8 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // test -------
         firstView = FViewController()
         secondView = SViewController()
         
