@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		E8E034FC20F487A50030C41C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E034FB20F487A50030C41C /* AppDelegate.swift */; };
 		E8E034FE20F487A50030C41C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E034FD20F487A50030C41C /* ViewController.swift */; };
-		E8E0350120F487A50030C41C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E034FF20F487A50030C41C /* Main.storyboard */; };
 		E8E0350320F487A60030C41C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E0350220F487A60030C41C /* Assets.xcassets */; };
 		E8E0350620F487A60030C41C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E0350420F487A60030C41C /* LaunchScreen.storyboard */; };
 		E8E0351120F487A60030C41C /* takeshingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0351020F487A60030C41C /* takeshingTests.swift */; };
 		E8E0351C20F487A60030C41C /* takeshingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0351B20F487A60030C41C /* takeshingUITests.swift */; };
+		E8E0352A20F4881A0030C41C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0352920F4881A0030C41C /* MainTabBarController.swift */; };
+		E8E0352C20F488490030C41C /* FViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0352B20F488490030C41C /* FViewController.swift */; };
+		E8E0352E20F4887B0030C41C /* SViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0352D20F4887B0030C41C /* SViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,6 @@
 		E8E034F820F487A50030C41C /* takeshing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = takeshing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E034FB20F487A50030C41C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E034FD20F487A50030C41C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E8E0350020F487A50030C41C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8E0350220F487A60030C41C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8E0350520F487A60030C41C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8E0350720F487A60030C41C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +48,9 @@
 		E8E0351720F487A60030C41C /* takeshingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = takeshingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E0351B20F487A60030C41C /* takeshingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = takeshingUITests.swift; sourceTree = "<group>"; };
 		E8E0351D20F487A60030C41C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8E0352920F4881A0030C41C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		E8E0352B20F488490030C41C /* FViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FViewController.swift; sourceTree = "<group>"; };
+		E8E0352D20F4887B0030C41C /* SViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +103,12 @@
 			children = (
 				E8E034FB20F487A50030C41C /* AppDelegate.swift */,
 				E8E034FD20F487A50030C41C /* ViewController.swift */,
-				E8E034FF20F487A50030C41C /* Main.storyboard */,
 				E8E0350220F487A60030C41C /* Assets.xcassets */,
 				E8E0350420F487A60030C41C /* LaunchScreen.storyboard */,
 				E8E0350720F487A60030C41C /* Info.plist */,
+				E8E0352920F4881A0030C41C /* MainTabBarController.swift */,
+				E8E0352B20F488490030C41C /* FViewController.swift */,
+				E8E0352D20F4887B0030C41C /* SViewController.swift */,
 			);
 			path = takeshing;
 			sourceTree = "<group>";
@@ -231,7 +237,6 @@
 			files = (
 				E8E0350620F487A60030C41C /* LaunchScreen.storyboard in Resources */,
 				E8E0350320F487A60030C41C /* Assets.xcassets in Resources */,
-				E8E0350120F487A50030C41C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +262,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E034FE20F487A50030C41C /* ViewController.swift in Sources */,
+				E8E0352E20F4887B0030C41C /* SViewController.swift in Sources */,
+				E8E0352C20F488490030C41C /* FViewController.swift in Sources */,
 				E8E034FC20F487A50030C41C /* AppDelegate.swift in Sources */,
+				E8E0352A20F4881A0030C41C /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,14 +301,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E8E034FF20F487A50030C41C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E8E0350020F487A50030C41C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E8E0350420F487A60030C41C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
