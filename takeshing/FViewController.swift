@@ -29,6 +29,7 @@ class FViewController:UIViewController,UITextFieldDelegate{
         txt.delegate = self
         
         // オブジェクトの追加
+        self.view.backgroundColor = UIColor.white
         self.view.addSubview(lab)
         self.view.addSubview(txt)
         
