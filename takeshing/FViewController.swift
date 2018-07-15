@@ -7,31 +7,49 @@
 
 import UIKit
 
-class FViewController:UIViewController,UITextFieldDelegate{
+class FViewController:UIViewController,UITextFieldDelegate,UIScrollViewDelegate{
     // 変数宣言
-    var lab:UILabel! = UILabel()
-    var txt:UITextField! = UITextField()
+    var scroll:UIScrollView!
+    var lab:UILabel!
+    var txt:UITextField!
+    var dic:Dictionary<UITextField, UILabel>!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // UILabel
-        lab.frame = CGRect(x: self.view.frame.width / 2 - 100, y: self.view.frame.height / 2 - 50, width: 200, height: 30)
-        lab.backgroundColor = UIColor.lightGray
-        lab.text = ""
-        lab.textAlignment = NSTextAlignment.center    // アラインメント
-        lab.layer.masksToBounds = true
-        lab.layer.cornerRadius = 10
-        
-        // UITextField
-        txt.frame = CGRect(x: self.view.frame.width / 2 - 100, y: self.view.frame.height / 2 - 15, width: 200, height:30)
-        txt.borderStyle = .roundedRect  // ボーダー
-        txt.returnKeyType = .done   // Enterキーの」実効タイプ
-        txt.placeholder = "サンダー元気党入力フォー"   // プレースホルダー
-        txt.delegate = self
+        // scroll
+        scroll = UIScrollView()
+        scroll.backgroundColor = UIColor.white
+        scroll.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+        scroll.center = self.view.center
+        scroll.contentSize = CGSize(width: self.view.frame.width, height: 1000)
+        scroll.bounces = false
+        scroll.indicatorStyle = UIScrollViewIndicatorStyle.black
+        scroll.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+        scroll.delegate = self
+ 
+        dic = Dictionary<UITextField, UILabel>()
+        for i in 1 ..< 17 {
+                lab = UILabel()
+                lab.frame = CGRect(x: self.view.frame.width / 2 - 150, y: CGFloat(60 * i - 25), width: 100, height:20)
+                lab.text = " ラベル　\(i) "
+                lab.textAlignment = NSTextAlignment.center    // アラインメント
+                lab.layer.masksToBounds = true
+                lab.layer.cornerRadius = 10
+                lab.backgroundColor = UIColor.black
+                lab.textColor = UIColor.white
+                scroll.addSubview(lab)
+
+                txt = UITextField()
+                txt.frame = CGRect(x: self.view.frame.width / 2 - 150, y: CGFloat(60 * i), width: 300, height:30)
+                txt.borderStyle = UITextBorderStyle.roundedRect  // ボーダー
+                txt.returnKeyType = UIReturnKeyType.done   // Enterキーの」実効タイプ
+                txt.placeholder = "サンダー元気党入力フォーム \(i) "   // プレースホルダー
+                txt.delegate = self
+                scroll.addSubview(txt)
+                dic.updateValue(lab, forKey: txt)
+        }
         
         // オブジェクトの追加
-        self.view.backgroundColor = UIColor.white
-        self.view.addSubview(lab)
-        self.view.addSubview(txt)
+        self.view = scroll
         
     }
     override func didReceiveMemoryWarning() {
@@ -42,11 +60,34 @@ class FViewController:UIViewController,UITextFieldDelegate{
         tf.resignFirstResponder()
         return true
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
     //UITextFieldの編集後に処理を行う
     func textFieldDidEndEditing(_ textField: UITextField) {
-        lab.text = txt.text
+        let la:UILabel = dic[textField]!
+        la.text = textField.text
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // スクロール中の処理
+        print("didScroll")
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // ドラッグ開始時の処理
+        print("beginDragging")
+    }
+}
+extension UIScrollView {
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+        self.endEditing(true)
+    }
+    
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesMoved(touches, with: event)
+        print("touchesMoved")
+    }
+    
+    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesEnded(touches, with: event)
+        print("touchesEnded")
     }
 }

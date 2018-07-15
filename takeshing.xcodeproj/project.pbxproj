@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E808C20720FB9B0700E70B86 /* TViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E808C20620FB9B0700E70B86 /* TViewController.swift */; };
 		E8E034FC20F487A50030C41C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E034FB20F487A50030C41C /* AppDelegate.swift */; };
 		E8E034FE20F487A50030C41C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E034FD20F487A50030C41C /* ViewController.swift */; };
 		E8E0350320F487A60030C41C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E0350220F487A60030C41C /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E808C20620FB9B0700E70B86 /* TViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TViewController.swift; sourceTree = "<group>"; };
 		E8E034F820F487A50030C41C /* takeshing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = takeshing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E034FB20F487A50030C41C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E034FD20F487A50030C41C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				E8E0352920F4881A0030C41C /* MainTabBarController.swift */,
 				E8E0352B20F488490030C41C /* FViewController.swift */,
 				E8E0352D20F4887B0030C41C /* SViewController.swift */,
+				E808C20620FB9B0700E70B86 /* TViewController.swift */,
 			);
 			path = takeshing;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E034FE20F487A50030C41C /* ViewController.swift in Sources */,
+				E808C20720FB9B0700E70B86 /* TViewController.swift in Sources */,
 				E8E0352E20F4887B0030C41C /* SViewController.swift in Sources */,
 				E8E0352C20F488490030C41C /* FViewController.swift in Sources */,
 				E8E034FC20F487A50030C41C /* AppDelegate.swift in Sources */,
