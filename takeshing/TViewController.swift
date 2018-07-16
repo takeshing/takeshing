@@ -8,11 +8,10 @@
 
 import UIKit
 
-class TViewController:UIViewController,UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate{
+class TViewController:UIViewController,UITextFieldDelegate,UIScrollViewDelegate{
     var scroll:UIScrollView!
     var txt:UITextField!
-    var btn: UIButton!
-    var table:UITableView!
+    var btn:UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,12 +31,47 @@ class TViewController:UIViewController,UITextFieldDelegate,UIScrollViewDelegate,
         txt.returnKeyType = UIReturnKeyType.done   // Enterキーの」実効タイプ
         txt.placeholder = "サンダー元気党入力フォーム"   // プレースホルダー
         txt.delegate = self
-        scroll.addSubview(txt)
         
         btn = UIButton()
         btn.setTitle("ランキング", for: UIControlState.normal)
-        btn.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 40, width: 100, height:30)
+        btn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+        btn.setTitle("Tapped!", for: UIControlState.highlighted)
+        btn.setTitleColor(UIColor.red, for: UIControlState.highlighted)
+        btn.backgroundColor = UIColor.white
+        btn.layer.cornerRadius = 10
+        btn.layer.borderWidth = 1        //サイズ
+        btn.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 50, width: 100, height:30)
+        // タップされたときのaction
+        btn.addTarget( self,
+                         action: #selector(TViewController.buttonTapped(sender:)),
+                         for: .touchUpInside)
+        
+        scroll.addSubview(txt)
         scroll.addSubview(btn)
+        
         self.view = scroll
+    }
+    @objc func buttonTapped(sender : AnyObject) {
+        print("buttonTapped")
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    // 完了してテキストフィールドを閉じる
+    func textFieldShouldReturn(_ tf:UITextField) -> Bool{
+        tf.resignFirstResponder()
+        return true
+    }
+    //UITextFieldの編集後に処理を行う
+    func textFieldDidEndEditing(_ textField: UITextField) {
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // スクロール中の処理
+        print("didScroll")
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // ドラッグ開始時の処理
+        print("beginDragging")
     }
 }
