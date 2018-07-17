@@ -8,54 +8,56 @@
 
 import UIKit
 
-class TViewController:UIViewController,UITextFieldDelegate,UIScrollViewDelegate{
-    var scroll:UIScrollView!
+class TViewController:UIViewController,UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+    var viewBottom:UITableView!
     var txt:UITextField!
     var btn:UIButton!
+    var items: [String] = ["あああああ", "いいいいいい", "ううううう", "ええええええ", "おおおおお"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scroll = UIScrollView()
-        scroll.backgroundColor = UIColor.white
-        scroll.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-        scroll.center = self.view.center
-        scroll.contentSize = CGSize(width: self.view.frame.width, height: 1000)
-        scroll.bounces = false
-        scroll.indicatorStyle = UIScrollViewIndicatorStyle.black
-        scroll.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-        scroll.delegate = self
-
+        let viewTop:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: 110))
+        viewTop.backgroundColor = UIColor.lightGray
         txt = UITextField()
-        txt.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 10, width: 300, height:30)
+        txt.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 30, width: 300, height:30)
         txt.borderStyle = UITextBorderStyle.roundedRect  // ボーダー
         txt.returnKeyType = UIReturnKeyType.done   // Enterキーの」実効タイプ
         txt.placeholder = "サンダー元気党入力フォーム"   // プレースホルダー
         txt.delegate = self
         
         btn = UIButton()
-        btn.setTitle("ランキング", for: UIControlState.normal)
+        btn.setTitle("お試しボタン", for: UIControlState.normal)
         btn.setTitleColor(UIColor.blue, for: UIControlState.normal)
         btn.setTitle("Tapped!", for: UIControlState.highlighted)
         btn.setTitleColor(UIColor.red, for: UIControlState.highlighted)
         btn.backgroundColor = UIColor.white
         btn.layer.cornerRadius = 10
         btn.layer.borderWidth = 1        //サイズ
-        btn.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 50, width: 100, height:30)
+        btn.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 70, width: 120, height:30)
         // タップされたときのaction
         btn.addTarget( self,
                          action: #selector(TViewController.buttonTapped(sender:)),
                          for: .touchUpInside)
         
-        scroll.addSubview(txt)
-        scroll.addSubview(btn)
+        viewTop.addSubview(txt)
+        viewTop.addSubview(btn)
         
-        self.view = scroll
-    }
-    @objc func buttonTapped(sender : AnyObject) {
-        print("buttonTapped")
+        self.view.addSubview(viewTop)
+        
+        // UITableView
+        viewBottom = UITableView()
+        viewBottom.frame = CGRect(x: 0, y: 110, width: self.view.frame.width, height: self.view.frame.height - 110)
+        viewBottom.delegate = self
+        viewBottom.dataSource = self
+        viewBottom.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(viewBottom)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    @objc func buttonTapped(sender : AnyObject) {
+        print("buttonTapped")
     }
     // 完了してテキストフィールドを閉じる
     func textFieldShouldReturn(_ tf:UITextField) -> Bool{
@@ -65,13 +67,16 @@ class TViewController:UIViewController,UITextFieldDelegate,UIScrollViewDelegate{
     //UITextFieldの編集後に処理を行う
     func textFieldDidEndEditing(_ textField: UITextField) {
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // スクロール中の処理
-        print("didScroll")
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // ドラッグ開始時の処理
-        print("beginDragging")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = self.items[indexPath.row]
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("セルを選択しました！ #\(indexPath.row)!")
     }
 }
