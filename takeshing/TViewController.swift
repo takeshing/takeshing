@@ -9,10 +9,11 @@
 import UIKit
 
 class TViewController:UIViewController,UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
-    var viewBottom:UITableView!
+    var viewTable:UITableView!
+    var imgview: UIImageView!
     var txt:UITextField!
     var btn:UIButton!
-    var items: [String] = ["あああああ", "いいいいいい", "ううううう", "ええええええ", "おおおおお", "かかっかかか", "kikikikikikikikikikikikikikikiki"]
+    var items: [String] = ["まさる", "ありを", "たけし", "雷", "まさる", "ありを", "たけし", "雷", "まさる", "ありを", "たけし", "雷"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,16 +57,21 @@ class TViewController:UIViewController,UITextFieldDelegate, UITableViewDelegate,
         self.view.addSubview(viewTop)
         
         // UITableView
-        viewBottom = UITableView()
-        viewBottom.translatesAutoresizingMaskIntoConstraints = false
-
+        viewTable = UITableView()
+        viewTable.translatesAutoresizingMaskIntoConstraints = false
         // 誓約に依存させる為、サイズ指定は行わない。
         // viewBottom.frame = CGRect(x: 0, y: 110, width: self.view.frame.width, height: self.view.frame.height - 110)
-        viewBottom.delegate = self
-        viewBottom.dataSource = self
-        viewBottom.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.view.addSubview(viewBottom)
+        viewTable.delegate = self
+        viewTable.dataSource = self
+        viewTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(viewTable)
 
+        //UIImageView
+        imgview = UIImageView()
+        imgview.translatesAutoresizingMaskIntoConstraints = false
+        imgview.backgroundColor = UIColor.red
+        self.view.addSubview(imgview)
+        
         // 誓約宣言
         // 基準点となるself.viewからの相対位置を指定していく。基準点に対して相対指定した物を基準にさらに別の相対位置を指定する感じ。
         // 制約の種類はある程度暗記しておくべきだろう。
@@ -89,6 +95,12 @@ class TViewController:UIViewController,UITextFieldDelegate, UITableViewDelegate,
         // txt.frame = CGRect(x: self.view.frame.width / 2 - 150, y: 30, width: 300, height:30)
         // ↓ 完ぺきに同義ではないが、大体のニュアンスをあわせておく
         // ** 重要！コンポーネントとして親子関係がある場合、子は親からの相対的位置を指定しないとダメっぽい。
+        // と思ったら違った。
+        // view.frame.widthとかはrectangleを指定されていないものから取得するすると0になる模様。
+        // たとえば全て制約でまかなった場合、全てのviewオブジェクトはrectangle指定いらないことになるが、誓約指定の対比として、
+        // 基準となる幅や高さの指定を行いたい時がある。この場合にはself.view.frameから取る事になる。
+        // self.view.frameは実効環境の画面サイズのheight、widthがデフォで指定されている模様。対比としたい基準値は
+        // self.view.frameから取ると覚えておく事。
         txt.leadingAnchor.constraint(equalTo:viewTop.leadingAnchor, constant: self.view.frame.width * 0.05).isActive = true
         txt.trailingAnchor.constraint(equalTo:viewTop.trailingAnchor, constant: self.view.frame.width * -0.05).isActive = true
         txt.topAnchor.constraint(equalTo:viewTop.topAnchor, constant: 30).isActive = true
@@ -102,10 +114,19 @@ class TViewController:UIViewController,UITextFieldDelegate, UITableViewDelegate,
         btn.widthAnchor.constraint(equalToConstant:120).isActive = true
         
         // viewBottom.frame = CGRect(x: 0, y: 110, width: self.view.frame.width, height: self.view.frame.height - 110)
-        viewBottom.topAnchor.constraint(equalTo:viewTop.bottomAnchor).isActive = true
-        viewBottom.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0).isActive = true
-        viewBottom.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0).isActive = true
-        viewBottom.heightAnchor.constraint(equalToConstant: self.view.frame.height - 110).isActive = true
+        viewTable.topAnchor.constraint(equalTo:viewTop.bottomAnchor).isActive = true
+        viewTable.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0).isActive = true
+        viewTable.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0).isActive = true
+        viewTable.heightAnchor.constraint(equalToConstant: (self.view.frame.height - 110) / 3).isActive = true
+        
+        imgview.topAnchor.constraint(equalTo:viewTable.bottomAnchor).isActive = true
+        imgview.heightAnchor.constraint(equalToConstant: (self.view.frame.height - 110) / 3 * 2).isActive = true
+        imgview.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0).isActive = true
+        imgview.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0).isActive = true
+        
+        // rectangleなら一行だが、制約の場合少なくとも数行から表現されるのでどうしてもソースが長くなるが仕方ない。
+        // このデメリットとトレードオフして、HW毎の機微な差や、縦横の回転を自動で組み換えてくれるので押さえる以外の選択肢がない。
+        // 気合で馴れろ。
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -132,6 +153,17 @@ class TViewController:UIViewController,UITextFieldDelegate, UITableViewDelegate,
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("セルを選択しました！ #\(indexPath.row)!")
+        var img : UIImage! = UIImage()
+        print(items[indexPath.row])
+        if items[indexPath.row] == "まさる" {
+            img = UIImage(named:"masaru.jpg")
+        } else if items[indexPath.row] == "ありを" {
+            img = UIImage(named: "arioka.jpg")
+        } else if items[indexPath.row] == "たけし" {
+            img = UIImage(named: "takeshi.jpg")
+        } else if items[indexPath.row] == "雷" {
+            img = UIImage(named: "rai.jpg")
+        }
+        imgview.image = img
     }
 }

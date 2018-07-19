@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E808C20720FB9B0700E70B86 /* TViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E808C20620FB9B0700E70B86 /* TViewController.swift */; };
+		E84E5F532100F26700E74728 /* rai.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84E5F4F2100F26400E74728 /* rai.jpg */; };
+		E84E5F542100F26700E74728 /* takeshi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84E5F502100F26500E74728 /* takeshi.jpg */; };
+		E84E5F552100F26700E74728 /* arioka.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84E5F512100F26600E74728 /* arioka.jpg */; };
+		E84E5F562100F26700E74728 /* masaru.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E84E5F522100F26700E74728 /* masaru.jpg */; };
 		E8E034FC20F487A50030C41C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E034FB20F487A50030C41C /* AppDelegate.swift */; };
 		E8E034FE20F487A50030C41C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E034FD20F487A50030C41C /* ViewController.swift */; };
 		E8E0350320F487A60030C41C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E0350220F487A60030C41C /* Assets.xcassets */; };
@@ -38,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		E808C20620FB9B0700E70B86 /* TViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TViewController.swift; sourceTree = "<group>"; };
+		E84E5F4F2100F26400E74728 /* rai.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rai.jpg; sourceTree = "<group>"; };
+		E84E5F502100F26500E74728 /* takeshi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = takeshi.jpg; sourceTree = "<group>"; };
+		E84E5F512100F26600E74728 /* arioka.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = arioka.jpg; sourceTree = "<group>"; };
+		E84E5F522100F26700E74728 /* masaru.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = masaru.jpg; sourceTree = "<group>"; };
 		E8E034F820F487A50030C41C /* takeshing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = takeshing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E034FB20F487A50030C41C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E034FD20F487A50030C41C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +114,10 @@
 				E8E034FB20F487A50030C41C /* AppDelegate.swift */,
 				E8E034FD20F487A50030C41C /* ViewController.swift */,
 				E8E0350220F487A60030C41C /* Assets.xcassets */,
+				E84E5F512100F26600E74728 /* arioka.jpg */,
+				E84E5F522100F26700E74728 /* masaru.jpg */,
+				E84E5F4F2100F26400E74728 /* rai.jpg */,
+				E84E5F502100F26500E74728 /* takeshi.jpg */,
 				E8E0350420F487A60030C41C /* LaunchScreen.storyboard */,
 				E8E0350720F487A60030C41C /* Info.plist */,
 				E8E0352920F4881A0030C41C /* MainTabBarController.swift */,
@@ -238,8 +250,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E84E5F532100F26700E74728 /* rai.jpg in Resources */,
+				E84E5F552100F26700E74728 /* arioka.jpg in Resources */,
 				E8E0350620F487A60030C41C /* LaunchScreen.storyboard in Resources */,
 				E8E0350320F487A60030C41C /* Assets.xcassets in Resources */,
+				E84E5F562100F26700E74728 /* masaru.jpg in Resources */,
+				E84E5F542100F26700E74728 /* takeshi.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
