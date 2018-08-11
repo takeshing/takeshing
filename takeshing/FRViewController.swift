@@ -13,6 +13,10 @@ class FRViewController : UIViewController{
     let viewBase: UIView = UIView()
     let viewP:UIImageView = UIImageView()
     let viewS:UIView = UIView()
+// 縦
+    //    let viewUp:UIImageView = UIImageView(frame: CGRect(x: 165, y: 135, width: 200, height: 260))
+// 横
+    let viewUp:UIImageView = UIImageView()
     let btn1 = UIButton()
     let btn2 = UIButton()
     let btn3 = UIButton()
@@ -32,6 +36,7 @@ class FRViewController : UIViewController{
     var s_height : CGFloat = 0.0
     var p_width : CGFloat = 0.0
     var s_width : CGFloat = 0.0
+    var role = true;
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +54,7 @@ class FRViewController : UIViewController{
         }
         audio.prepareToPlay()
 
+        // self.view.translatesAutoresizingMaskIntoConstraints = false
         viewBase.translatesAutoresizingMaskIntoConstraints = false
         viewBase.backgroundColor = UIColor.red
         var img : UIImage! = UIImage()
@@ -58,6 +64,10 @@ class FRViewController : UIViewController{
         viewP.image = img
         viewS.translatesAutoresizingMaskIntoConstraints = false
         viewS.backgroundColor = UIColor.green
+        viewUp.backgroundColor = UIColor.blue
+        viewUp.layer.borderWidth = 1
+        viewUp.layer.borderColor = UIColor.white.cgColor
+        viewUp.isHidden = true
         
         btn1.translatesAutoresizingMaskIntoConstraints = false
         btn1.layer.borderWidth = 1
@@ -65,8 +75,11 @@ class FRViewController : UIViewController{
         btn1.setImage(UIImage.init(named: "arioka.jpg"), for: UIControlState.normal)
         btn1.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
-                       for: .touchUpInside)
-        
+                       for: UIControlEvents.touchUpInside)
+        btn1.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
+
         btn2.translatesAutoresizingMaskIntoConstraints = false
         btn2.layer.borderWidth = 1
         btn2.layer.borderColor = UIColor.white.cgColor
@@ -74,7 +87,10 @@ class FRViewController : UIViewController{
         btn2.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
-        
+        btn2.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
+
         btn3.translatesAutoresizingMaskIntoConstraints = false
         btn3.layer.borderWidth = 1
         btn3.layer.borderColor = UIColor.white.cgColor
@@ -82,7 +98,10 @@ class FRViewController : UIViewController{
         btn3.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
-        
+        btn3.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
+
         btn4.translatesAutoresizingMaskIntoConstraints = false
         btn4.layer.borderWidth = 1
         btn4.layer.borderColor = UIColor.white.cgColor
@@ -90,6 +109,9 @@ class FRViewController : UIViewController{
         btn4.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
+        btn4.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
 
         btn5.translatesAutoresizingMaskIntoConstraints = false
         btn5.layer.borderWidth = 1
@@ -98,6 +120,9 @@ class FRViewController : UIViewController{
         btn5.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
+        btn5.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
 
         btn6.translatesAutoresizingMaskIntoConstraints = false
         btn6.layer.borderWidth = 1
@@ -106,6 +131,9 @@ class FRViewController : UIViewController{
         btn6.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
+        btn6.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
 
         btn7.translatesAutoresizingMaskIntoConstraints = false
         btn7.layer.borderWidth = 1
@@ -114,6 +142,9 @@ class FRViewController : UIViewController{
         btn7.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
+        btn7.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
 
         btn8.translatesAutoresizingMaskIntoConstraints = false
         btn8.layer.borderWidth = 1
@@ -122,6 +153,9 @@ class FRViewController : UIViewController{
         btn8.addTarget(self,
                        action: #selector(FRViewController.tapped(sender:)),
                        for: .touchUpInside)
+        btn8.addTarget(self,
+                       action: #selector(FRViewController.touchDown(sender:)),
+                       for: UIControlEvents.touchDown)
 
         viewS.addSubview(btn1)
         viewS.addSubview(btn2)
@@ -132,16 +166,15 @@ class FRViewController : UIViewController{
         viewS.addSubview(btn7)
         viewS.addSubview(btn8)
 
-
         viewBase.addSubview(viewP)
         viewBase.addSubview(viewS)
+        viewBase.addSubview(viewUp)
         self.view.addSubview(viewBase)
-        
-        viewBase.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0).isActive = true
-        viewBase.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0).isActive = true
-        viewBase.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        viewBase.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
-
+        if (self.view.frame.height > self.view.frame.width){
+            role = false;
+        } else {
+            role = true;
+        }
         reloade()
         
     }
@@ -149,9 +182,20 @@ class FRViewController : UIViewController{
         let b : UIButton = sender as! UIButton
         audio.currentTime = 0
         audio.play()
+        viewUp.isHidden = true
         print(b.image(for: UIControlState.normal))
-        
     }
+    @objc func touchDown(sender : AnyObject) {
+        let btn : UIButton = sender as! UIButton
+        viewUp.image = btn.currentImage
+        if(role){
+            viewUp.frame = CGRect(x: 165, y: 135, width: 200, height: 260)
+        } else {
+            viewUp.frame = CGRect(x: 255, y: 70, width: 200, height: 260)
+        }
+        viewUp.isHidden = false
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotationChange(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
@@ -165,20 +209,33 @@ class FRViewController : UIViewController{
         tabbar_hieght = UITabBarController().tabBar.frame.size.height
         print(status_height)
         print(tabbar_hieght)
-        if (self.view.frame.height > self.view.frame.width){
+
+        viewBase.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0).isActive = true
+        viewBase.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0).isActive = true
+        viewBase.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        viewBase.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
+
+        // 共通
+        viewS.bottomAnchor.constraint(equalTo:self.view.bottomAnchor, constant: -tabbar_hieght).isActive = true
+        viewS.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0).isActive = true
+        if (self.view.frame.height > self.view.frame.width && !role){
             p_height = (self.view.frame.height - status_height - tabbar_hieght) * 0.65
             s_height = (self.view.frame.height - status_height - tabbar_hieght) * 0.35
             p_width = self.view.frame.width
             s_width = self.view.frame.width
             portraitConstaints = [
                 viewP.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0),
-                viewP.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0),
                 viewP.topAnchor.constraint(equalTo:self.view.topAnchor, constant:status_height),
+                viewP.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0),
                 viewP.bottomAnchor.constraint(equalTo:self.view.bottomAnchor, constant: -(s_height + tabbar_hieght)),
-                viewS.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0),
-                viewS.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0),
-                viewS.topAnchor.constraint(equalTo:self.view.topAnchor, constant:status_height + p_height),
+                viewP.widthAnchor.constraint(equalToConstant: p_width),
+                viewP.heightAnchor.constraint(equalToConstant: p_height),
                 viewS.bottomAnchor.constraint(equalTo:self.view.bottomAnchor, constant: -tabbar_hieght),
+                viewS.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0),
+                viewS.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0),
+                viewS.topAnchor.constraint(equalTo:viewP.bottomAnchor, constant:0),
+                viewS.widthAnchor.constraint(equalToConstant: s_width),
+                viewS.heightAnchor.constraint(equalToConstant: s_height),
                 btn1.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0),
                 btn1.topAnchor.constraint(equalTo:viewS.topAnchor, constant: 0),
                 btn1.widthAnchor.constraint(equalToConstant: self.view.frame.width / 4),
@@ -212,20 +269,24 @@ class FRViewController : UIViewController{
                 btn8.widthAnchor.constraint(equalTo: btn1.widthAnchor),
                 btn8.heightAnchor.constraint(equalTo: btn1.heightAnchor)
             ]
-        } else {
+        } else if(self.view.frame.height < self.view.frame.width && role) {
             p_height = self.view.frame.height - status_height - tabbar_hieght
             s_height = self.view.frame.height - status_height - tabbar_hieght
             p_width = self.view.frame.width * 0.7
             s_width = self.view.frame.width * 0.3
             landscapeConstaints = [
                 viewP.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: 0),
-                viewP.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: -s_width),
                 viewP.topAnchor.constraint(equalTo:self.view.topAnchor, constant:0),
+                viewP.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: -s_width),
                 viewP.bottomAnchor.constraint(equalTo:self.view.bottomAnchor, constant: -tabbar_hieght),
-                viewS.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant: p_width),
-                viewS.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0),
-                viewS.topAnchor.constraint(equalTo:self.view.topAnchor, constant:status_height),
+                viewP.widthAnchor.constraint(equalToConstant: p_width),
+                viewP.heightAnchor.constraint(equalToConstant: p_height),
                 viewS.bottomAnchor.constraint(equalTo:self.view.bottomAnchor, constant: -tabbar_hieght),
+                viewS.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: 0),
+                viewS.leadingAnchor.constraint(equalTo:self.view.trailingAnchor, constant: p_width),
+                viewS.topAnchor.constraint(equalTo:self.view.topAnchor, constant:0),
+                viewS.widthAnchor.constraint(equalToConstant: s_width),
+                viewS.heightAnchor.constraint(equalToConstant: s_height),
                 btn1.leadingAnchor.constraint(equalTo:viewS.leadingAnchor, constant: 0),
                 btn1.topAnchor.constraint(equalTo:viewS.topAnchor, constant: 0),
                 btn1.widthAnchor.constraint(equalToConstant: s_width / 2),
@@ -261,20 +322,38 @@ class FRViewController : UIViewController{
             ]
         }
 
-        if (self.view.frame.height > self.view.frame.width){
-            portraitConstaints.forEach { (cons) in
-                cons.isActive = true
-            }
+        if (self.view.frame.height > self.view.frame.width && !role){
             landscapeConstaints.forEach { (cons) in
                 cons.isActive = false
             }
-        } else {
+            portraitConstaints.forEach { (cons) in
+                cons.isActive = true
+            }
+            role = true
+        } else if (self.view.frame.height < self.view.frame.width && role){
             portraitConstaints.forEach { (cons) in
                 cons.isActive = false
             }
             landscapeConstaints.forEach { (cons) in
                 cons.isActive = true
             }
+            role = false
         }
+    }
+}
+extension UIImage {
+    func resize(size _size: CGSize) -> UIImage? {
+        let widthRatio = _size.width / size.width
+        let heightRatio = _size.height / size.height
+        let ratio = widthRatio < heightRatio ? widthRatio : heightRatio
+        
+        let resizedSize = CGSize(width: size.width * ratio, height: size.height * ratio)
+        
+        UIGraphicsBeginImageContextWithOptions(resizedSize, false, 0.0) // 変更
+        draw(in: CGRect(origin: .zero, size: resizedSize))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return resizedImage
     }
 }
